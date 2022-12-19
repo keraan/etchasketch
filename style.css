@@ -1,0 +1,27 @@
+#container {
+    border: 1px solid;
+    display: grid;
+    width: 500px;
+    height: 500px;
+    background-color: var(--secondary-light);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    justify-items: stretch;
+}
+
+div {
+
+}
+
+.grid {
+    background-color: white;
+    border: 1px solid;
+    transition: background-color 0.2s;
+}
+
+.grid:hover {
+    background-color: black;
+}
+
+.coloured {
+    background-color:black;
+}
