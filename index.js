@@ -4,6 +4,7 @@ const eraseBtn = document.querySelector('#eraseBtn')
 const penBtn = document.querySelector('#penBtn')
 const colourPicker = document.querySelector('#colourPicker')
 const gridSize = document.querySelector('#gridSize')
+const gridSizeText = document.querySelector('#gridSizeText')
 
 
 let size = gridSize.value
@@ -24,7 +25,7 @@ const createGrid = () => {
 }
 
 const resetGrid = () => {
-    size = gridSize.value
+    changeGridSize()
     removeGrid()
     createGrid()
     run()
@@ -49,6 +50,11 @@ function changeColour() {
     colour = colourPicker.value
 }
 
+function changeGridSize() {
+    size = gridSize.value
+    gridSizeText.textContent = `${size} x ${size}`
+}
+
 //value listeners
 gridSize.oninput = resetGrid
 colourPicker.oninput = changeColour
@@ -57,11 +63,17 @@ container.onmousedown = (e) => {
     mouseDown = true
     e.preventDefault()
 }
+document.body.onmouseup = () => {
+    mouseDown = false
+}
 
 
 //main function
 
-const write = (e) => {e.target.style.backgroundColor = colour}
+const write = (e) => {
+    if (!mouseDown && !(e.type === 'mousedown')) return
+    e.target.style.backgroundColor = colour
+}
 
 
 function run() {
@@ -69,6 +81,7 @@ function run() {
     const divs = document.querySelectorAll('.grid')
     divs.forEach(div => {
         div.addEventListener('mousedown', write)
+        div.addEventListener('mouseover', write)
     })
     clearGrid.addEventListener('click', () => {
         divs.forEach(div => div.style.backgroundColor = 'white')
