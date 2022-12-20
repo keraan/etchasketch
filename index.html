@@ -8,14 +8,17 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div class="coloured"></div>
-    <div id="container">
+    <div id="overall">
+        <div id="container">
 
-    </div>
-    <div class="controlDiv">
-        <button class="controls" id="clearGrid">Clear Grid</button>
-        <button class="controls"></button>
-        <button class="controls"></button>
+        </div>
+        <div class="controlDiv">
+            <button class="controls" id="clearGridBtn">Clear Grid</button>
+            <button class="controls" id="eraseBtn">Enable Eraser</button>
+            <button class="controls" id="penBtn">Pen</button>
+            <input type="color" id="colourPicker" value="#000000">
+            <input type="range" min="1" max="64" value="16" class="slider" id="gridSize">
+        </div>
     </div>
 	<script src="index.js"></script>
   </body>

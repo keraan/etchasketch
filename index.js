@@ -1,38 +1,85 @@
 const container = document.querySelector('#container')
-const coloured = document.querySelector('.coloured')
+const clearGrid = document.querySelector('#clearGridBtn')
+const eraseBtn = document.querySelector('#eraseBtn')
+const penBtn = document.querySelector('#penBtn')
+const colourPicker = document.querySelector('#colourPicker')
+const gridSize = document.querySelector('#gridSize')
 
 
-let rows = 25
-let columns = 25
-let colour = 'pink'
-coloured.style.backgroundColor = colour
+let size = gridSize.value
+let colour = colourPicker.value
+let mouseDown = false
 
-container.style.gridTemplateColumns = `repeat(${columns}, 1fr)`
-container.style.gridTemplateRows = `repeat(${rows}, 1fr)`
 
-const createGrid = (rows, columns) => {
-    for (i = 0; i < rows*columns; i++) {
+
+//create grid
+const createGrid = () => {
+    for (i = 0; i < size**2; i++) {
         const div = document.createElement('div')
         div.classList.add('grid')
         container.append(div)
     }
+    container.style.gridTemplateColumns = `repeat(${size}, 1fr)`
+    container.style.gridTemplateRows = `repeat(${size}, 1fr)`
 }
-createGrid(rows,columns)
+
+const resetGrid = () => {
+    size = gridSize.value
+    removeGrid()
+    createGrid()
+    run()
+}
+
+
+//buttons
+
+eraseBtn.addEventListener('click', () => {
+    colour = 'white'
+})
+
+penBtn.addEventListener('click', () => {
+    colour = colourPicker.value
+})
 
 const removeGrid = () => {
     container.innerHTML = ''
 }
 
-
-const divs = document.querySelectorAll('.grid')
-divs.forEach(div => div.addEventListener('mouseover', () => {
-    div.classList.add('coloured')
+function changeColour() {
+    colour = colourPicker.value
 }
-))
+
+//value listeners
+gridSize.oninput = resetGrid
+colourPicker.oninput = changeColour
+
+container.onmousedown = (e) => {
+    mouseDown = true
+    e.preventDefault()
+}
 
 
-const clearGrid = document.querySelector('#clearGrid')
-clearGrid.addEventListener('click', () => {
-    divs.forEach(div => div.classList.remove('coloured'))
-})
+//main function
+
+const write = (e) => {e.target.style.backgroundColor = colour}
+
+
+function run() {
+    createGrid()
+    const divs = document.querySelectorAll('.grid')
+    divs.forEach(div => {
+        div.addEventListener('mousedown', write)
+    })
+    clearGrid.addEventListener('click', () => {
+        divs.forEach(div => div.style.backgroundColor = 'white')
+    })
+}
+run()
+
+
+
+
+
+
+
 

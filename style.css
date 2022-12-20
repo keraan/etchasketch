@@ -1,5 +1,5 @@
 #container {
-    border: 1px solid;
+    border: 2px solid;
     display: grid;
     width: 500px;
     height: 500px;
@@ -14,7 +14,6 @@ div {
 
 .grid {
     background-color: white;
-    border: 1px solid;
     transition: background-color 0.2s;
 }
 
@@ -22,6 +21,15 @@ div {
     background-color: black;
 }
 
-.coloured {
-    background-color:black;
+#overall {
+    display:inline-block;
+    justify-content: center;
+}
+
+body {
+    background-color: rgb(46,43,63);
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
 }
